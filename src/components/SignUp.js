@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
-// import { useMutation } from "react-query";
-// import { API } from "../Config/api";
+import { useMutation } from "react-query";
+import { useHistory } from "react-router-dom";
+import { API, setAuthToken } from "../config/api";
+import { LiteratureContext } from "../context/LiteratureContext";
 
 const SignUp = (props) => {
+  const [, dispatch] = useContext(LiteratureContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,32 +19,59 @@ const SignUp = (props) => {
 
   const { email, password, fullName, gender, phone, address } = formData;
 
-  // const [storeUser] = useMutation(async () => {
-  //   try {
-  //     const config = {
-  //       headers: { "Content-Type": "application/json" },
-  //     };
-  //     const body = JSON.stringify({
-  //       email,
-  //       password,
-  //       fullName,
-  //       gender,
-  //       phone,
-  //       address,
-  //     });
-  //     const res = await API.post("/register", body, config);
+  const history = useHistory();
 
-  //     alert("Successfully create an account, please log in to continue");
-  //     props.hasAcc();
-  //     return res;
-  //   } catch (err) {
-  //     alert(`Error creating an account: ${err}`);
-  //   }
-  // });
+  const [storeUser] = useMutation(async () => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      const body = JSON.stringify({
+        email,
+        password,
+        fullName,
+        gender,
+        phone,
+        address,
+      });
+      const res = await API.post("/register", body, config);
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: res.data.data,
+      });
+
+      setAuthToken(res.data.data.token);
+
+      try {
+        const res = await API.get("/auth");
+
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.user,
+        });
+      } catch (err) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+
+      if (res.data.data.isAdmin) {
+        dispatch({
+          type: "ADMIN",
+        });
+        return history.push("/admin");
+      }
+      return history.push("/home");
+    } catch (err) {
+      dispatch({
+        type: "LOGIN_FAIL",
+      });
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // storeUser();
+    storeUser();
   };
 
   return (

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import HeaderIcon from "./HeaderIcon";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { LiteratureContext } from "../context/LiteratureContext";
 
 const NavBarAdmin = () => {
+  const [, dispatch] = useContext(LiteratureContext);
   return (
     <div className="p-3 center-vertical justify-content-between bg-black">
       <HeaderIcon />
@@ -18,7 +20,7 @@ const NavBarAdmin = () => {
         <div class="dropdown-menu dropdown-menu-right">
           <Link
             class="dropdown-item"
-            // onClick={() => dispatch({ type: "LOGOUT" })}
+            onClick={() => dispatch({ type: "LOGOUT" })}
           >
             <RiLogoutBoxLine style={{ color: "red" }} />
             &nbsp;&nbsp;&nbsp;Logout

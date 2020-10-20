@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Modal } from "react-bootstrap";
-// import { useHistory } from "react-router-dom";
-// import { useQuery, useMutation } from "react-query";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "react-query";
 
-// import { API } from "../Config/api";
-// import { BookContext } from "../Context/bookContext";
+import { API } from "../config/api";
+import { LiteratureContext } from "../context/LiteratureContext";
 
 import ModalNotif from "./ModalNotif";
-// import { BoxLoading } from "react-loadingg";
 
 const FormAddLiterature = () => {
   const [addBook, setaddBook] = useState(false);
@@ -18,67 +16,57 @@ const FormAddLiterature = () => {
     isbn: "",
     author: "",
     thumb: "",
-    file: "",
+    attache: "",
   });
 
-  let { title, publication, pages, isbn, author, thumb, file } = formData;
+  let { title, publication, pages, isbn, author, thumb, attache } = formData;
 
-  // const [state] = useContext(BookContext);
-  // const userId = state.user.id;
-  // console.log(`ini userId: ${userId}`);
+  const [state] = useContext(LiteratureContext);
+  const userId = state.user.id;
 
-  // const history = useHistory();
+  const history = useHistory();
 
-  // const [storeBook] = useMutation(async () => {
-  //   try {
-  //     if (thumb == "")
-  //       thumb =
-  //         "http://uploader.nusaserver.com/server/php/files/Thin-Book-3D-Template-Thin.jpg";
+  const [storeLiterature] = useMutation(async () => {
+    try {
+      if (thumb == "")
+        thumb =
+          "http://uploader.nusaserver.com/server/php/files/Rectangle%2010.png";
 
-  //     const config = {
-  //       headers: { "Content-Type": "application/json" },
-  //     };
-  //     const body = JSON.stringify({
-  //       title,
-  //       thumb,
-  //       publication,
-  //       categoryId,
-  //       userId,
-  //       pages,
-  //       isbn,
-  //       aboutBook,
-  //       file,
-  //     });
-  //     const res = await API.post("/book", body, config);
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      const body = JSON.stringify({
+        title,
+        thumb,
+        publication,
+        userId,
+        pages,
+        isbn,
+        author,
+        attache,
+      });
+      const res = await API.post("/literature", body, config);
 
-  //     setFormData({
-  //       title: "",
-  //       publication: "",
-  //       categoryId: "",
-  //       pages: "",
-  //       isbn: "",
-  //       aboutBook: "",
-  //       thumb: "",
-  //       file: "",
-  //     });
+      setFormData({
+        title: "",
+        publication: "",
+        pages: "",
+        isbn: "",
+        author: "",
+        thumb: "",
+        attache: "",
+      });
 
-  //     return res;
-  //   } catch (err) {
-  //     alert(`Error creating book: ${err}`);
-  //   }
-  // });
+      return res;
+    } catch (err) {
+      alert(`Error creating literature: ${err}`);
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // storeBook();
+    storeLiterature();
   };
-
-  // const { isLoading, error, data: categories } = useQuery("getCategories", () =>
-  //   API.get("/categories")
-  // );
-
-  // if (isLoading) return <BoxLoading />;
-  // if (error) return "An error has occured: " + error.message;
 
   return (
     <div className="my-3">
@@ -149,9 +137,9 @@ const FormAddLiterature = () => {
           className="form-control my-4"
           id="file"
           placeholder="Put your book URL for book file"
-          value={file}
+          value={attache}
           onChange={(e) => {
-            setFormData({ ...formData, file: e.target.value });
+            setFormData({ ...formData, attache: e.target.value });
           }}
         />
         {/* <button className="btn btn-grey d-block my-4 p-2">

@@ -1,35 +1,35 @@
 import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
-// import { useMutation } from "react-query";
-// import { BookContext } from "../Context/bookContext";
-// import { API } from "../Config/api";
+import { useMutation } from "react-query";
+import { LiteratureContext } from "../context/LiteratureContext";
+import { API } from "../config/api";
 
 const ChangePP = (props) => {
   const [thumb, setFormData] = useState("");
-  // const [state, _] = useContext(BookContext);
+  const [state] = useContext(LiteratureContext);
 
-  // const [patchUser] = useMutation(async () => {
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     };
-  //     const body = JSON.stringify({ thumb });
-  //     const res = await API.patch(`/user/${state.user.id}`, body, config);
+  const [patchUser] = useMutation(async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify({ thumb });
+      const res = await API.patch(`/user/${state.user.id}`, body, config);
 
-  //     setFormData("");
-  //     props.onHide();
-  //     props.refetch();
-  //     return res;
-  //   } catch (err) {
-  //     alert(`Error: ${err}`);
-  //   }
-  // });
+      setFormData("");
+      props.onHide();
+      props.refetch();
+      return res;
+    } catch (err) {
+      alert(`Error: ${err}`);
+    }
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // patchUser();
+    patchUser();
   };
   return (
     <Modal {...props} centered>

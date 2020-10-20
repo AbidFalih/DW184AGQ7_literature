@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
-// import { useHistory } from "react-router-dom";
-// import { API, setAuthToken } from "../Config/api";
-// import { BookContext } from "../Context/bookContext";
+import { useHistory } from "react-router-dom";
+import { API, setAuthToken } from "../config/api";
+import { LiteratureContext } from "../context/LiteratureContext";
 
 const SignIn = (props) => {
-  // const [, dispatch] = useContext(BookContext);
+  const [, dispatch] = useContext(LiteratureContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -14,51 +14,51 @@ const SignIn = (props) => {
 
   const { email, password } = formData;
 
-  // const history = useHistory();
+  const history = useHistory();
 
   //a .map() creates array, if didn't want an array or to return data, use forEach instead
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const config = {
-    //   headers: { "Content-Type": "application/json" },
-    // };
-    // const body = JSON.stringify({ email, password });
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    const body = JSON.stringify({ email, password });
 
-    // try {
-    //   const res = await API.post("/login", body, config);
-    //   dispatch({
-    //     type: "LOGIN_SUCCESS",
-    //     payload: res.data.data,
-    //   });
+    try {
+      const res = await API.post("/login", body, config);
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: res.data.data,
+      });
 
-    //   setAuthToken(res.data.data.token);
+      setAuthToken(res.data.data.token);
 
-    //   try {
-    //     const res = await API.get("/auth");
+      try {
+        const res = await API.get("/auth");
 
-    //     dispatch({
-    //       type: "USER_LOADED",
-    //       payload: res.data.user,
-    //     });
-    //   } catch (err) {
-    //     dispatch({
-    //       type: "AUTH_ERROR",
-    //     });
-    //   }
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.user,
+        });
+      } catch (err) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
 
-    //   if (res.data.data.isAdmin) {
-    //     dispatch({
-    //       type: "ADMIN",
-    //     });
-    //     return history.push("/admin");
-    //   }
-    //   return history.push("/home");
-    // } catch (err) {
-    //   dispatch({
-    //     type: "LOGIN_FAIL",
-    //   });
-    // }
+      if (res.data.data.isAdmin) {
+        dispatch({
+          type: "ADMIN",
+        });
+        return history.push("/admin");
+      }
+      return history.push("/home");
+    } catch (err) {
+      dispatch({
+        type: "LOGIN_FAIL",
+      });
+    }
   };
 
   return (
