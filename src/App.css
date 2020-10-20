@@ -1,38 +1,158 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.bg-black {
+  background-color: #161616 !important;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* .modal-backdrop {
+  background-color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  color: white;
+  background-color: #161616 !important;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+} */
+
+.h-100vh {
+  height: 100vh;
+}
+
+.home-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.detail-thumb {
+  width: 400px !important;
+  height: 543px;
+}
+
+.fo-tnr {
+  font-family: "Times New Roman";
+  font-weight: bold;
+}
+
+.fo-red {
+  color: red;
+}
+
+.img-profile-admin {
+  width: 50px;
+  height: 50px;
+}
+
+/* ----------------------------------------*/
+
+#bg-landing {
+  height: 100vh;
+}
+
+#bg-landing p {
+  font-size: 20px;
+  line-height: 33px;
+}
+
+#bg-landing button {
+  width: 200px;
+  height: 50px;
+}
+
+.h1-landing {
+  line-height: 82.49% !important;
+  font-family: "Times New Roman";
+}
+
+.home-book {
+  height: 44vh;
+}
+
+.h1-home {
+  font-size: 96px;
+  font-family: "Times New Roman";
+  font-weight: bold;
+  line-height: 101.5%;
+}
+
+.p1-home {
+  font-size: 24px;
+}
+
+.bg-home {
+  /* background-color: #e6f2fd !important; */
+  background-size: cover;
+}
+
+.bg-profile {
+  background-color: #252525 !important;
+}
+
+.f-header {
+  font-family: "Times New Roman";
+  font-style: italic;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 41px;
+}
+
+.img-profile {
+  width: 100px;
+}
+
+.img-profile-big {
+  height: 27vh;
+}
+
+.img-profile-admin {
+  width: 50px;
+  height: 50px;
+}
+
+.full-page {
+  height: 100vh;
+}
+
+.half-page {
+  height: 50vh;
+}
+
+.btn-nav-rounded {
+  border-radius: 50px !important;
+  width: 270px;
+  height: 50px;
+}
+
+.img-detailB {
+  height: 50vh;
+}
+
+.btn-category {
+  color: #000000 !important;
+  background-color: rgba(233, 233, 233, 0.7) !important;
+}
+
+.link-noDec {
+  text-decoration: none !important;
+}
+
+.active-btn {
+  box-shadow: 0 0 0 0.2rem #ee4622 !important;
+  color: #fff !important;
+  background-color: #ee4622 !important;
 }
