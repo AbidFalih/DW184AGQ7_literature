@@ -11,6 +11,7 @@ import { MdLocationOn, MdMail } from "react-icons/md";
 import { FaPhoneAlt, FaTransgender } from "react-icons/fa";
 import Literature from "../components/Literature";
 import InfoProfile from "../components/InfoProfile";
+import { urlAssets } from "../config/api";
 
 const Profile = () => {
   const [changePP, setChangePP] = useState(false);
@@ -47,17 +48,17 @@ const Profile = () => {
                   value={data.data.user.email}
                 />
                 <InfoProfile
-                  icon={<MdMail />}
+                  icon={<FaTransgender />}
                   valueLabel="Gender"
                   value={data.data.user.gender ? "Woman" : "Male"}
                 />
                 <InfoProfile
-                  icon={<MdMail />}
+                  icon={<FaPhoneAlt />}
                   valueLabel="Mobile Phone"
                   value={data.data.user.phone}
                 />
                 <InfoProfile
-                  icon={<MdMail />}
+                  icon={<MdLocationOn />}
                   valueLabel="Address"
                   value={data.data.user.address}
                 />
@@ -66,7 +67,7 @@ const Profile = () => {
                 <img
                   className="img-profile-big"
                   // src="http://uploader.nusaserver.com/server/php/files/soompi-28b1304617c4ff994f12a840b309edfc_750x500.jpg"
-                  src={data.data.user.thumb}
+                  src={urlAssets.img + data.data.user.thumb}
                   alt="user"
                 />
                 <button

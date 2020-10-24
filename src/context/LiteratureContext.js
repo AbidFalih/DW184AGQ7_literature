@@ -34,6 +34,11 @@ const reducer = (state, action) => {
         isLogin: true,
         loading: false,
       };
+    case "CHANGE_PP_SUCCESS":
+      return {
+        ...state,
+        user: action.payload,
+      };
     case "ADMIN":
       localStorage.setItem("isAdmin", true);
       return {

@@ -5,21 +5,28 @@ import { LiteratureContext } from "../context/LiteratureContext";
 import { API } from "../config/api";
 
 const ChangePP = (props) => {
-  const [thumb, setFormData] = useState("");
-  const [state] = useContext(LiteratureContext);
+  const [state, dispatch] = useContext(LiteratureContext);
+  const [thumb, setThumb] = useState("");
+  const [preview, setPreview] = useState(state.user.thumb);
 
   const [patchUser] = useMutation(async () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
-      const body = JSON.stringify({ thumb });
-      const res = await API.patch(`/user/${state.user.id}`, body, config);
+      const formData = new FormData();
+      formData.append("thumb", thumb, thumb.name);
 
-      setFormData("");
+      const res = await API.patch("/update-photo", formData, config);
+
+      setThumb("");
       props.onHide();
+      dispatch({
+        type: "CHANGE_PP_SUCCESS",
+        payload: res.data.user,
+      });
       props.refetch();
       return res;
     } catch (err) {
@@ -35,7 +42,7 @@ const ChangePP = (props) => {
     <Modal {...props} centered>
       <Modal.Body>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input
+          {/* <input
             type="text"
             class="form-control"
             placeholder="Please input your URL image profile"
@@ -43,11 +50,21 @@ const ChangePP = (props) => {
             onChange={(e) => {
               setFormData(e.target.value);
             }}
+          /> */}
+          <input
+            type="file"
+            className="form-control-file"
+            onChange={(e) => {
+              setThumb(e.target.files[0]);
+              const objectURL = URL.createObjectURL(e.target.files[0]);
+              setPreview(objectURL);
+            }}
           />
           <button type="submit" class="btn btn-danger btn-block my-3">
             Change
           </button>
         </form>
+        <img src={preview} alt="selected-picture" />
       </Modal.Body>
     </Modal>
   );
