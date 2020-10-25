@@ -9,7 +9,7 @@ import ModalNotif from "./ModalNotif";
 
 const FormAddLiterature = () => {
   const [addBook, setaddBook] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formControl, setFormControl] = useState({
     title: "",
     publication: "",
     pages: "",
@@ -18,8 +18,9 @@ const FormAddLiterature = () => {
     thumb: "",
     attache: "",
   });
+  console.log(formControl);
 
-  let { title, publication, pages, isbn, author, thumb, attache } = formData;
+  let { title, publication, pages, isbn, author, thumb, attache } = formControl;
 
   const [state] = useContext(LiteratureContext);
   const userId = state.user.id;
@@ -28,26 +29,25 @@ const FormAddLiterature = () => {
 
   const [storeLiterature] = useMutation(async () => {
     try {
-      if (thumb == "")
-        thumb =
-          "http://uploader.nusaserver.com/server/php/files/Rectangle%2010.png";
-
       const config = {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "multipart/form-data" },
       };
-      const body = JSON.stringify({
-        title,
-        thumb,
-        publication,
-        userId,
-        pages,
-        isbn,
-        author,
-        attache,
-      });
-      const res = await API.post("/literature", body, config);
 
-      setFormData({
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("publication_date", publication);
+      formData.append("pages", pages);
+      formData.append("isbn", isbn);
+      formData.append("author", author);
+      formData.append("attache", attache);
+      formData.append("thumb", thumb);
+      formData.append("userId", userId);
+
+      console.log(formData);
+
+      const res = await API.post("/literature", formData, config);
+
+      setFormControl({
         title: "",
         publication: "",
         pages: "",
@@ -57,6 +57,9 @@ const FormAddLiterature = () => {
         attache: "",
       });
 
+      document.getElementById("form-literature").reset();
+
+      console.log(`ini res: ${res}`);
       return res;
     } catch (err) {
       alert(`Error creating literature: ${err}`);
@@ -71,7 +74,11 @@ const FormAddLiterature = () => {
   return (
     <div className="my-3">
       <h3 className="fo-tnr">Add Literature</h3>
-      <form className="my-5" onSubmit={(e) => handleSubmit(e)}>
+      <form
+        id="form-literature"
+        className="my-5"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <input
           type="text"
           className="form-control my-4"
@@ -79,17 +86,7 @@ const FormAddLiterature = () => {
           placeholder="Title"
           value={title}
           onChange={(e) => {
-            setFormData({ ...formData, title: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          className="form-control"
-          id="thumb"
-          placeholder="Put your image URL for book cover"
-          value={thumb}
-          onChange={(e) => {
-            setFormData({ ...formData, thumb: e.target.value });
+            setFormControl({ ...formControl, title: e.target.value });
           }}
         />
         <input
@@ -99,7 +96,7 @@ const FormAddLiterature = () => {
           placeholder="Publication Date"
           value={publication}
           onChange={(e) => {
-            setFormData({ ...formData, publication: e.target.value });
+            setFormControl({ ...formControl, publication: e.target.value });
           }}
         />
         <input
@@ -109,7 +106,7 @@ const FormAddLiterature = () => {
           placeholder="Pages"
           value={pages}
           onChange={(e) => {
-            setFormData({ ...formData, pages: e.target.value });
+            setFormControl({ ...formControl, pages: e.target.value });
           }}
         />
         <input
@@ -119,7 +116,7 @@ const FormAddLiterature = () => {
           placeholder="ISBN"
           value={isbn}
           onChange={(e) => {
-            setFormData({ ...formData, isbn: e.target.value });
+            setFormControl({ ...formControl, isbn: e.target.value });
           }}
         />
         <input
@@ -129,24 +126,32 @@ const FormAddLiterature = () => {
           placeholder="Author, e.g. E E Eizky, Astina Haris, Chloe Grace Moretz)"
           value={author}
           onChange={(e) => {
-            setFormData({ ...formData, author: e.target.value });
+            setFormControl({ ...formControl, author: e.target.value });
           }}
         />
-        <input
-          type="text"
-          className="form-control my-4"
-          id="file"
-          placeholder="Put your book URL for book file"
-          value={attache}
-          onChange={(e) => {
-            setFormData({ ...formData, attache: e.target.value });
-          }}
-        />
-        {/* <button className="btn btn-grey d-block my-4 p-2">
-            Attache Book File &nbsp;&nbsp;
-            <CgAttachment style={{ verticalAlign: "baseline" }} />
-          </button> */}
-        <div class="d-flex flex-row-reverse">
+        <div className="d-flex form-control my-4">
+          <label>Select Image: </label>
+          <input
+            type="file"
+            className="ml-3"
+            onChange={(e) => {
+              setFormControl({ ...formControl, thumb: e.target.files[0] });
+            }}
+          />
+        </div>
+
+        <div className="d-flex form-control">
+          <label>Attache File: </label>
+          <input
+            type="file"
+            className="ml-3"
+            onChange={(e) => {
+              setFormControl({ ...formControl, attache: e.target.files[0] });
+            }}
+          />
+        </div>
+
+        <div className="d-flex flex-row-reverse my-4">
           <button
             className="btn btn-danger m-lg-0 p-2"
             onClick={() => setaddBook(true)}

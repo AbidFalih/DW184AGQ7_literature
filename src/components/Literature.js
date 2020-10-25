@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { urlAssets } from "../config/api";
 
 const Literature = ({ literature }) => {
   const history = useHistory();
@@ -13,7 +14,8 @@ const Literature = ({ literature }) => {
       >
         <img
           className="card-img-top"
-          src={literature.thumb}
+          src={urlAssets.img + literature.thumb}
+          // src={literature.thumb}
           // src="http://uploader.nusaserver.com/server/php/files/Brisingr_book_cover.png"
           alt="literature"
           style={{ height: "270px" }}
