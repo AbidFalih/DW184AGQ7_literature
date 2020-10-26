@@ -70,32 +70,23 @@ const SearchResult = (props) => {
   // console.log(`paramss: ${paramss}`);
   // console.log(literatures);
   return (
-    <div className="bg-black">
+    <div className="container-fluid bg-black h-100vh">
       <NavBar />
-      {/* <Search /> */}
-      <Search setQuery={(query) => setSearchQuery(query)} isYear={yearQuery} />
-      <div className="d-flex">
-        {/* <p>
-          hehe: {searchQuery} + {paramss} + {searchQuery3} + {public_year}
-        </p> */}
-        <TimePeriod
-          setYear={(year) => setYearQuery(year)}
-          isQuery={searchQuery}
+      <div className="mx-5 p-0">
+        <Search
+          setQuery={(query) => setSearchQuery(query)}
+          isYear={yearQuery}
         />
-        <div className="row mb-3 flex-grow-1">
-          {literatures.data.literature.map((literature) => (
-            <Literature literature={literature} />
-          ))}
-          {/* {literatures.data.literatures.map((literature) =>
-            literature.title
-              .toLowerCase()
-              .includes(searchQuery2.toLowerCase()) ||
-            searchQuery2.includes("*") ? (
+        <div className="d-flex mt-3">
+          <TimePeriod
+            setYear={(year) => setYearQuery(year)}
+            isQuery={searchQuery}
+          />
+          <div className="row mb-3 ml-2 flex-grow-1">
+            {literatures.data.literature.map((literature) => (
               <Literature literature={literature} />
-            ) : (
-              ""
-            )
-          )} */}
+            ))}
+          </div>
         </div>
       </div>
     </div>

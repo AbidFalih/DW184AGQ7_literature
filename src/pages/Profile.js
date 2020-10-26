@@ -34,39 +34,38 @@ const Profile = () => {
   if (error2) return "An error2 has occured: " + error2.message;
 
   return (
-    <div class="px-5 py-2 bg-black h-100vh">
+    <div className="container-fluid bg-black h-100vh">
       <NavBar />
-      <div class="p-2">
-        <div className="d-flex flex-column">
-          <div className="half-page d-flex flex-column my-3">
-            <h3 className="fo-tnr">Profile</h3>
-            <div className="jumbotron p-0 py-4 px-5 d-flex bg-profile">
-              <div className="flex-grow-1 my-auto">
-                <InfoProfile
-                  icon={<MdMail />}
-                  valueLabel="Email"
-                  value={data.data.user.email}
-                />
-                <InfoProfile
-                  icon={<FaTransgender />}
-                  valueLabel="Gender"
-                  value={data.data.user.gender ? "Woman" : "Male"}
-                />
-                <InfoProfile
-                  icon={<FaPhoneAlt />}
-                  valueLabel="Mobile Phone"
-                  value={data.data.user.phone}
-                />
-                <InfoProfile
-                  icon={<MdLocationOn />}
-                  valueLabel="Address"
-                  value={data.data.user.address}
-                />
-              </div>
-              <div className="m-2 d-flex flex-column">
+      <div className="mx-5 d-flex flex-column">
+        <div className="half-page d-flex flex-column my-2">
+          <h3 className="fo-tnr">Profile</h3>
+          <div className="jumbotron py-4 px-5 d-flex bg-profile">
+            <div className="flex-grow-1 my-auto">
+              <InfoProfile
+                icon={<MdMail className="ic-profile" />}
+                valueLabel="Email"
+                value={data.data.user.email}
+              />
+              <InfoProfile
+                icon={<FaTransgender className="ic-profile" />}
+                valueLabel="Gender"
+                value={data.data.user.gender ? "Woman" : "Male"}
+              />
+              <InfoProfile
+                icon={<FaPhoneAlt className="ic-profile" />}
+                valueLabel="Mobile Phone"
+                value={data.data.user.phone}
+              />
+              <InfoProfile
+                icon={<MdLocationOn className="ic-profile" />}
+                valueLabel="Address"
+                value={data.data.user.address}
+              />
+            </div>
+            <div className="d-flex align-items-center">
+              <div>
                 <img
                   className="img-profile-big"
-                  // src="http://uploader.nusaserver.com/server/php/files/soompi-28b1304617c4ff994f12a840b309edfc_750x500.jpg"
                   src={urlAssets.img + data.data.user.thumb}
                   alt="user"
                 />
@@ -79,17 +78,17 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="my-2">
-            <h3 className="fo-tnr my-3">My Literature</h3>
-            <div className="row mb-3">
-              {literatures.data.literatures.map((literature) =>
-                literature.user.id == state.user.id ? (
-                  <Literature literature={literature} />
-                ) : (
-                  ""
-                )
-              )}
-            </div>
+        </div>
+        <div className="my-3 p-0">
+          <h3 className="fo-tnr my-3">My Literature</h3>
+          <div className="row mb-3">
+            {literatures.data.literatures.map((literature) =>
+              literature.user.id == state.user.id ? (
+                <Literature literature={literature} />
+              ) : (
+                ""
+              )
+            )}
           </div>
         </div>
       </div>

@@ -13,18 +13,21 @@ const Literature = ({ literature }) => {
         onClick={() => history.push(`/detail-literature/${literature.id}`)}
       >
         <img
-          className="card-img-top"
+          className="card-img-top mx-auto"
           src={urlAssets.img + literature.thumb}
-          // src={literature.thumb}
-          // src="http://uploader.nusaserver.com/server/php/files/Brisingr_book_cover.png"
           alt="literature"
-          style={{ height: "270px" }}
+          style={{ height: "240px", width: "180px" }}
         />
-        <div className="card-body pb-0">
-          {/* <h6>Judul Bukuu</h6>
-          <p>Nama Penulis</p> */}
+        <div className="card-body mx-auto px-0" style={{ width: "180px" }}>
           <h6>{literature.title}</h6>
-          <p>{literature.author}</p>
+          <div className="d-flex justify-content-between">
+            <small className="text-muted">{literature.author}</small>
+            {literature.publication_date != null && (
+              <small className="text-muted">
+                {literature.publication_date.slice(0, 4)}
+              </small>
+            )}
+          </div>
         </div>
       </div>
     </div>

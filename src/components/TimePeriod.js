@@ -9,13 +9,11 @@ const TimePeriod = (props) => {
   const history = useHistory();
   return (
     <div>
-      <p className="text-danger">Anytime</p>
+      <p className="text-danger mb-0 pl-3">Anytime</p>
       <form>
         <select
           className="custom-select my-2"
-          // value={time}
           onChange={(e) => {
-            // setTime(e.target.value);
             console.log(`berhasil change ${e.target.value}`);
             props.setYear(e.target.value);
             history.push(
