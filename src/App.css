@@ -149,6 +149,19 @@
   width: 90px;
 }
 
+.no-acc-literature {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: -3px;
+  bottom: 1rem;
+  right: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background-color: rgba(65, 49, 49, 0.5);
+}
+
 /* ----------------------------------------*/
 
 #bg-landing {

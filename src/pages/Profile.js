@@ -84,7 +84,18 @@ const Profile = () => {
           <div className="row mb-3">
             {literatures.data.literatures.map((literature) =>
               literature.user.id == state.user.id ? (
-                <Literature literature={literature} />
+                <div style={{ position: "relative" }}>
+                  {literature.status != "Approved" && (
+                    <div className="no-acc-literature">
+                      {literature.status == "Cancelled" ? (
+                        <b className="text-danger">Cancelled</b>
+                      ) : (
+                        <b className="text-warning">Waiting to be Verified</b>
+                      )}
+                    </div>
+                  )}
+                  <Literature literature={literature} />
+                </div>
               ) : (
                 ""
               )

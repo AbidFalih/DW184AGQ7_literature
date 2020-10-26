@@ -117,7 +117,14 @@ const DetailLiteratur = () => {
               </small>
             }
           />
-          <button className="btn btn-danger mt-5">
+          <button
+            className="btn btn-danger mt-5"
+            onClick={() =>
+              window.open(
+                urlAssets.literature + detailLiterature.data.literature.attache
+              )
+            }
+          >
             Download &nbsp;&nbsp;
             <BsCloudDownload />
           </button>

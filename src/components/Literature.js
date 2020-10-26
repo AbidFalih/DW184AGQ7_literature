@@ -6,10 +6,10 @@ const Literature = ({ literature }) => {
   const history = useHistory();
 
   return (
-    <div className="col-sm-3 mb-4">
+    <div className="col-sm-3">
       <div
         role="button"
-        className="card h-100 mx-1 bg-black"
+        className="card mx-1 bg-black"
         onClick={() => history.push(`/detail-literature/${literature.id}`)}
       >
         <img

@@ -18,7 +18,6 @@ const FormAddLiterature = () => {
     thumb: "",
     attache: "",
   });
-  console.log(formControl);
 
   let { title, publication, pages, isbn, author, thumb, attache } = formControl;
 
@@ -43,8 +42,6 @@ const FormAddLiterature = () => {
       formData.append("thumb", thumb);
       formData.append("userId", userId);
 
-      console.log(formData);
-
       const res = await API.post("/literature", formData, config);
 
       setFormControl({
@@ -59,7 +56,6 @@ const FormAddLiterature = () => {
 
       document.getElementById("form-literature").reset();
 
-      console.log(`ini res: ${res}`);
       return res;
     } catch (err) {
       alert(`Error creating literature: ${err}`);
