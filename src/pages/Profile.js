@@ -34,7 +34,7 @@ const Profile = () => {
   if (error2) return "An error2 has occured: " + error2.message;
 
   return (
-    <div class="px-5 py-2 bg-black">
+    <div class="px-5 py-2 bg-black h-100vh">
       <NavBar />
       <div class="p-2">
         <div className="d-flex flex-column">

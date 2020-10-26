@@ -70,7 +70,7 @@ const SignIn = (props) => {
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="email"
-            class="form-control"
+            className="form-control custom-input"
             placeholder="Email"
             value={email}
             onChange={(e) => {
@@ -79,14 +79,14 @@ const SignIn = (props) => {
           />
           <input
             type="password"
-            class="form-control my-2"
+            className="form-control my-2 custom-input"
             placeholder="Password"
             value={password}
             onChange={(e) => {
               setFormData({ ...formData, password: e.target.value });
             }}
           />
-          <button type="submit" class="btn btn-danger btn-block my-3">
+          <button type="submit" className="btn btn-danger btn-block my-3">
             Sign In
           </button>
         </form>

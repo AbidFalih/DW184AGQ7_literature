@@ -16,7 +16,7 @@ const MyCollection = () => {
   if (error) return "An error has occured: " + error.message;
 
   return (
-    <div class="px-5 py-2 bg-black">
+    <div class="px-5 py-2 bg-black h-100vh">
       <NavBar />
       <div>
         <h3 className="fo-tnr">My Library</h3>

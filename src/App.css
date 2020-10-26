@@ -3,9 +3,7 @@
   color: white;
 }
 
-/* .modal-backdrop {
-  background-color: white;
-}
+/* .modal-backdrop { background-color: white !important; } */
 
 .modal-content {
   position: relative;
@@ -21,10 +19,27 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
-} */
+}
+
+.modal-header {
+  border-bottom: 0 none !important;
+}
+
+.custom-input {
+  color: white !important;
+  background-color: rgba(210, 210, 210, 0.25) !important;
+}
+
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.custom-option {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
 
 .h-100vh {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .home-container {
@@ -58,25 +73,38 @@
   height: 50px;
 }
 
+.img-header {
+  width: 150px;
+}
+
+.img-landing-bg {
+  height: 80vh;
+  position: absolute;
+  right: 6rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.h1-landing {
+  line-height: 100% !important;
+  font-family: "Times New Roman";
+}
+
 /* ----------------------------------------*/
 
 #bg-landing {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #bg-landing p {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 33px;
 }
 
 #bg-landing button {
   width: 200px;
   height: 50px;
-}
-
-.h1-landing {
-  line-height: 82.49% !important;
-  font-family: "Times New Roman";
 }
 
 .home-book {

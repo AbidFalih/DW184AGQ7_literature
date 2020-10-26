@@ -4,6 +4,7 @@ import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import { API, setAuthToken } from "../config/api";
 import { LiteratureContext } from "../context/LiteratureContext";
+import { MdArrowDropDownCircle } from "react-icons/md";
 
 const SignUp = (props) => {
   const [, dispatch] = useContext(LiteratureContext);
@@ -83,7 +84,7 @@ const SignUp = (props) => {
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="email"
-            class="form-control"
+            className="form-control custom-input"
             id="email"
             placeholder="Email"
             value={email}
@@ -93,7 +94,7 @@ const SignUp = (props) => {
           />
           <input
             type="password"
-            class="form-control my-2"
+            className="form-control my-2 custom-input"
             id="password"
             placeholder="Password"
             value={password}
@@ -103,7 +104,7 @@ const SignUp = (props) => {
           />
           <input
             type="text"
-            class="form-control"
+            className="form-control custom-input"
             id="fullName"
             placeholder="Full Name"
             value={fullName}
@@ -112,7 +113,7 @@ const SignUp = (props) => {
             }}
           />
           <select
-            className="custom-select my-2"
+            className="form-control custom-input my-2"
             value={gender}
             onChange={(e) => {
               setFormData({ ...formData, gender: e.target.value });
@@ -121,12 +122,16 @@ const SignUp = (props) => {
             <option value="" disable selected hidden>
               Gender
             </option>
-            <option value="false">Man</option>
-            <option value="true">Woman</option>
+            <option value="false" className="custom-option">
+              Man
+            </option>
+            <option value="true" className="custom-option">
+              Woman
+            </option>
           </select>
           <input
             type="text"
-            class="form-control"
+            className="form-control custom-input"
             id="phone"
             placeholder="Phone"
             value={phone}
@@ -136,7 +141,7 @@ const SignUp = (props) => {
           />
           <input
             type="text"
-            class="form-control my-2"
+            className="form-control my-2 custom-input"
             id="address"
             placeholder="Address"
             value={address}
@@ -144,7 +149,7 @@ const SignUp = (props) => {
               setFormData({ ...formData, address: e.target.value });
             }}
           />
-          <button type="submit" class="btn btn-danger btn-block my-3">
+          <button type="submit" className="btn btn-danger btn-block my-3">
             Sign Up
           </button>
         </form>
