@@ -4,9 +4,15 @@ import InfoDetail from "../components/InfoDetail";
 import NavBar from "../components/NavBar";
 import { useMutation, useQuery } from "react-query";
 import { LiteratureContext } from "../context/LiteratureContext";
-import { API } from "../config/api";
+import { API, urlAssets } from "../config/api";
 import { BoxLoading } from "react-loadingg";
 import ModalNotif from "../components/ModalNotif";
+
+import {
+  BsBookmarkDash,
+  BsBookmarkPlus,
+  BsCloudDownload,
+} from "react-icons/bs";
 
 const DetailLiteratur = () => {
   const { literatureId } = useParams();
@@ -64,18 +70,17 @@ const DetailLiteratur = () => {
   if (error2) return "An error has occured: " + error.message;
 
   return (
-    <div className="bg-black m-0 p-0">
+    <div className="container-fluid bg-black h-100vh">
       <NavBar />
-      <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
+      <div class="mx-5 mt-3 d-flex bd-highlight">
+        <div class="p-2">
           <img
-            // src="http://uploader.nusaserver.com/server/php/files/Brisingr_book_cover.png"
-            src={detailLiterature.data.literature.thumb}
+            src={urlAssets.img + detailLiterature.data.literature.thumb}
             alt="detail-literature"
             className="card-img-top detail-thumb"
           />
         </div>
-        <div class="p-2 flex-grow-1 bd-highlight">
+        <div class="ml-4 flex-grow-1">
           <InfoDetail
             labelValue={
               <h1 className="mb-0 fo-tnr">
@@ -112,7 +117,10 @@ const DetailLiteratur = () => {
               </small>
             }
           />
-          <button className="btn btn-danger mt-5">Download (icon)</button>
+          <button className="btn btn-danger mt-5">
+            Download &nbsp;&nbsp;
+            <BsCloudDownload />
+          </button>
         </div>
         <div class="p-2 bd-highlight">
           {collectioned.data.selectedLiterature ? (
@@ -123,7 +131,8 @@ const DetailLiteratur = () => {
                 deleteCollection();
               }}
             >
-              Removee From My Collection (icon)
+              Remove My Collection &nbsp;&nbsp;
+              <BsBookmarkDash />
             </button>
           ) : (
             <button
@@ -133,7 +142,8 @@ const DetailLiteratur = () => {
                 storeCollection();
               }}
             >
-              Add to My Collection (icon)
+              Add My Collection &nbsp;&nbsp;
+              <BsBookmarkPlus />
             </button>
           )}
         </div>
