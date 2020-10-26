@@ -16,11 +16,11 @@ const MyCollection = () => {
   if (error) return "An error has occured: " + error.message;
 
   return (
-    <div class="px-5 py-2 bg-black h-100vh">
+    <div class="container-fluid bg-black h-100vh">
       <NavBar />
-      <div>
+      <div className="mx-5">
         <h3 className="fo-tnr">My Library</h3>
-        <div className="row mb-3">
+        <div className="row mt-3">
           {data.data.collectionsUser.userLiteratures.map((literature) => (
             <Literature literature={literature} />
           ))}
