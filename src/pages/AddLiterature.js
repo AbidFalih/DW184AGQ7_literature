@@ -4,9 +4,11 @@ import NavBar from "../components/NavBar";
 
 const AddLiterature = () => {
   return (
-    <div className="px-5 py-2 bg-black">
+    <div className="container-fluid bg-black h-100vh">
       <NavBar />
-      <FormAddLiterature />
+      <div className="mx-5">
+        <FormAddLiterature />
+      </div>
     </div>
   );
 };

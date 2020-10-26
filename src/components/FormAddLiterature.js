@@ -72,16 +72,16 @@ const FormAddLiterature = () => {
   };
 
   return (
-    <div className="my-3">
+    <div className="m-0 p-0">
       <h3 className="fo-tnr">Add Literature</h3>
       <form
         id="form-literature"
-        className="my-5"
+        className="mt-4"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
           type="text"
-          className="form-control my-4"
+          className="form-control my-3 custom-input"
           id="title"
           placeholder="Title"
           value={title}
@@ -90,7 +90,7 @@ const FormAddLiterature = () => {
           }}
         />
         <input
-          className="form-control my-4"
+          className="form-control custom-input"
           type="date"
           id="publicationDate"
           placeholder="Publication Date"
@@ -100,7 +100,7 @@ const FormAddLiterature = () => {
           }}
         />
         <input
-          className="form-control"
+          className="form-control my-3 custom-input"
           type="number"
           id="pages"
           placeholder="Pages"
@@ -111,7 +111,7 @@ const FormAddLiterature = () => {
         />
         <input
           type="text"
-          className="form-control my-4"
+          className="form-control custom-input"
           id="isbn"
           placeholder="ISBN"
           value={isbn}
@@ -121,7 +121,7 @@ const FormAddLiterature = () => {
         />
         <input
           type="text"
-          className="form-control"
+          className="form-control my-3 custom-input"
           id="author"
           placeholder="Author, e.g. E E Eizky, Astina Haris, Chloe Grace Moretz)"
           value={author}
@@ -129,8 +129,10 @@ const FormAddLiterature = () => {
             setFormControl({ ...formControl, author: e.target.value });
           }}
         />
-        <div className="d-flex form-control my-4">
-          <label>Select Image: </label>
+        <div className="d-flex align-items-center">
+          <label className="form-control custom-input my-0 label-form">
+            Select Image:{" "}
+          </label>
           <input
             type="file"
             className="ml-3"
@@ -140,8 +142,10 @@ const FormAddLiterature = () => {
           />
         </div>
 
-        <div className="d-flex form-control">
-          <label>Attache File: </label>
+        <div className="d-flex my-3 align-items-center">
+          <label className="form-control custom-input my-0 label-form">
+            Attache File:{" "}
+          </label>
           <input
             type="file"
             className="ml-3"
@@ -151,7 +155,7 @@ const FormAddLiterature = () => {
           />
         </div>
 
-        <div className="d-flex flex-row-reverse my-4">
+        <div className="d-flex flex-row-reverse my-3">
           <button
             className="btn btn-danger m-lg-0 p-2"
             onClick={() => setaddBook(true)}
