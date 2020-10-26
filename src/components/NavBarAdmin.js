@@ -7,7 +7,7 @@ import { LiteratureContext } from "../context/LiteratureContext";
 const NavBarAdmin = () => {
   const [, dispatch] = useContext(LiteratureContext);
   return (
-    <div className="p-3 center-vertical justify-content-between bg-black">
+    <div className="px-5 py-2 center-vertical justify-content-between bg-black">
       <HeaderIcon />
       <div className="dropdown">
         <img

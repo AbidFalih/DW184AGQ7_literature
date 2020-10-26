@@ -138,6 +138,17 @@
   width: 130px !important;
 }
 
+.td-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.btn-form {
+  width: 90px;
+}
+
 /* ----------------------------------------*/
 
 #bg-landing {

@@ -63,29 +63,41 @@ const TableVerification = () => {
         </tr>
       </thead>
       <tbody>
-        {literatures.data.literatures.map((literature) => (
+        {literatures.data.literatures.map((literature, index) => (
           <tr>
-            <td>{literature.id}</td>
+            <td>{index + 1}</td>
             <td>{literature.author}</td>
             <td>{literature.isbn}</td>
-            <td>{literature.attache}</td>
-            <td>{literature.status}</td>
+            <td className="text-primary">{literature.attache}</td>
+            <td
+              className={
+                literature.status == "Approved"
+                  ? "text-success"
+                  : literature.status == "Cancelled"
+                  ? "text-danger"
+                  : "text-warning"
+              }
+            >
+              {literature.status}
+            </td>
             {literature.status == "Approved" ? (
-              <td>
-                <FaCheckCircle style={{ color: "green" }} className="ml-5" />
+              <td className="td-center">
+                <FaCheckCircle style={{ color: "green" }} />
               </td>
             ) : literature.status == "Cancelled" ? (
-              <MdCancel style={{ color: "red" }} className="ml-5" />
+              <td className="td-center">
+                <MdCancel style={{ color: "red" }} />
+              </td>
             ) : (
               <td>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger btn-form"
                   onClick={() => handleCancel(literature.id)}
                 >
                   Cancel
                 </button>{" "}
                 <button
-                  className="btn btn-success"
+                  className="btn btn-success btn-form"
                   onClick={() => handleAcc(literature.id)}
                 >
                   Approve

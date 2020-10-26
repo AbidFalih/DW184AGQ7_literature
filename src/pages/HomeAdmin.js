@@ -4,11 +4,11 @@ import TableVerification from "../components/TableVerification";
 
 const HomeAdmin = () => {
   return (
-    <div>
+    <div className="container-fluid h-100vh px-0">
       <NavBarAdmin />
 
-      <div>
-        <h3 className="fo-tnr">Literature Verification</h3>
+      <div className="mx-5">
+        <h3 className="fo-tnr my-4">Literature Verification</h3>
         <TableVerification />
       </div>
     </div>
