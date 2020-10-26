@@ -47,11 +47,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <PrivateRoute exact path="/home" component={Home} />
-        <PrivateRoute
-          exact
-          path="/search-result/:searchQuery"
-          component={SearchResult}
-        />
+        <PrivateRoute exact path="/search-result" component={SearchResult} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/my-collection" component={MyCollection} />
         <PrivateRoute exact path="/add-literature" component={AddLiterature} />

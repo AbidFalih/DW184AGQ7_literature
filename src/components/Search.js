@@ -3,20 +3,33 @@ import React, { useState } from "react";
 import { ImSearch } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 
-const Search = () => {
+const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState(null);
 
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    searchQuery
-      ? history.push(`/search-result/${searchQuery}`)
-      : history.push(`/search-result/*`);
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   props.setSearchQuery(searchQuery);
+  //   searchQuery
+  //     ? history.push(`/search-result/${searchQuery}`)
+  //     : history.push(`/search-result/*`);
+  // };
 
   return (
-    <form class="form-inline my-2 my-lg-0" onSubmit={(e) => handleSubmit(e)}>
+    <form
+      class="form-inline my-2 my-lg-0"
+      onSubmit={(e) => {
+        e.preventDefault();
+        props.setQuery(searchQuery);
+        props.isYear == undefined
+          ? history.push(`/search-result?title=${searchQuery}`)
+          : history.push(
+              `/search-result?title=${searchQuery}&public_year=${props.isYear}`
+            );
+      }}
+    >
+      {/* <form class="form-inline my-2 my-lg-0" onSubmit={(e) => handleSubmit(e)}> */}
       <input
         class="form-control mr-sm-2"
         type="search"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import TimePeriod from "../components/TimePeriod";
 import Literature from "../components/Literature";
@@ -6,35 +6,96 @@ import { useQuery } from "react-query";
 import { API } from "../config/api";
 import { BoxLoading } from "react-loadingg";
 import Search from "../components/Search";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
-const SearchResult = () => {
-  const { searchQuery } = useParams();
-  const { isLoading, error, data: literatures } = useQuery(
-    "getLiteratures",
-    () => API.get("/literatures")
+const SearchResult = (props) => {
+  const params = new URLSearchParams(props.location.search);
+  // const searchQuery3 = params.get("title");
+  // const public_year = params.get("public_year");
+
+  const [searchQuery, setSearchQuery] = useState(params.get("title"));
+  const [yearQuery, setYearQuery] = useState("");
+
+  // const { searchQuery2 } = useParams();
+  // const [searchQuery, setSearchQuery] = useState(params.get("title"));
+  // const [dataaa, setDataaa] = useState([]);
+
+  // useEffect(() => {
+  //   setSearchQuery(params.get("title"));
+  // }, [params]);
+
+  let propsLocation = props.location.search;
+
+  // let location = useLocation();
+
+  // const [paramss, setParamss] = useState(props.location.search);
+
+  useEffect(() => {
+    console.log(`useEffect triggered! ${searchQuery}, ${yearQuery}`);
+    refetch();
+  }, [searchQuery, yearQuery]);
+
+  const {
+    isLoading,
+    error,
+    data: literatures,
+    refetch,
+  } = useQuery("getLiteraturesSearch", () =>
+    API.get(`/literature${propsLocation}`)
   );
+
   if (isLoading) return <BoxLoading />;
   if (error) return "An error has occured: " + error.message;
 
-  console.log(searchQuery);
+  // console.log(`params: ${paramss}`);
+  console.log(literatures);
+  // refetch();
+
+  // const {
+  //   isLoading,
+  //   error,
+  //   data: literatures,
+  // } = useQuery("getLiteraturesSearch", () =>
+  //   API.get(`/literature?title=${searchQuery}&public_year=${public_year}`)
+  // );
+  // if (isLoading) return <BoxLoading />;
+  // if (error) return "An error has occured: " + error.message;
+
+  // setSearchQuery(params.get("title"));
+
+  // console.log(`searchQuery3: ${searchQuery3}`);
+  // console.log(`searchQuery: ${searchQuery}`);
+  // console.log(`location: ${location.search}`);
+  // console.log({ propsLoacation });
+  // console.log(`paramss: ${paramss}`);
+  // console.log(literatures);
   return (
     <div className="bg-black">
       <NavBar />
-      <Search />
+      {/* <Search /> */}
+      <Search setQuery={(query) => setSearchQuery(query)} isYear={yearQuery} />
       <div className="d-flex">
-        <TimePeriod />
+        {/* <p>
+          hehe: {searchQuery} + {paramss} + {searchQuery3} + {public_year}
+        </p> */}
+        <TimePeriod
+          setYear={(year) => setYearQuery(year)}
+          isQuery={searchQuery}
+        />
         <div className="row mb-3 flex-grow-1">
-          {literatures.data.literatures.map((literature) =>
+          {literatures.data.literature.map((literature) => (
+            <Literature literature={literature} />
+          ))}
+          {/* {literatures.data.literatures.map((literature) =>
             literature.title
               .toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            searchQuery.includes("*") ? (
+              .includes(searchQuery2.toLowerCase()) ||
+            searchQuery2.includes("*") ? (
               <Literature literature={literature} />
             ) : (
               ""
             )
-          )}
+          )} */}
         </div>
       </div>
     </div>

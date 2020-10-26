@@ -1,24 +1,37 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const TimePeriod = () => {
-  const [time, setTime] = useState(null);
+const TimePeriod = (props) => {
+  // const [time, setTime] = useState(null);
 
+  const year = new Date().getFullYear();
+
+  const history = useHistory();
   return (
     <div>
       <p className="text-danger">Anytime</p>
       <form>
         <select
           className="custom-select my-2"
-          value={time}
+          // value={time}
           onChange={(e) => {
-            setTime(e.target.value);
+            // setTime(e.target.value);
+            console.log(`berhasil change ${e.target.value}`);
+            props.setYear(e.target.value);
+            history.push(
+              `/search-result?title=${props.isQuery}&public_year=${e.target.value}`
+            );
           }}
           style={{ width: "150px" }}
         >
-          <option value="2020">Since 2020</option>
-          <option value="2019">Since 2019</option>
-          <option value="2018">Since 2018</option>
-          <option value="2017">Since 2017</option>
+          <option value="" disable selected hidden>
+            Select Year
+          </option>
+          <option value={year}>Since {year}</option>
+          <option value={year - 1}>Since {year - 1}</option>
+          <option value={year - 2}>Since {year - 2}</option>
+          <option value={year - 3}>Since {year - 3}</option>
+          <option value={year - 4}>Since {year - 4}</option>
         </select>
       </form>
     </div>
