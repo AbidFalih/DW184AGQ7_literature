@@ -13,7 +13,7 @@ function Landing() {
   return (
     <div
       id="bg-landing"
-      className="fluid-container m-0 pt-3 pl-5 bg-black d-flex flex-column"
+      className="container-fluid m-0 pt-3 pl-5 bg-black d-flex flex-column"
     >
       <HeaderIcon />
       <div className="flex-grow-1 d-flex">

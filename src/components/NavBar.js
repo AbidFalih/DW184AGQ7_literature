@@ -10,8 +10,8 @@ const NavBar = () => {
   let path = ["/profile", "/my-collection", "/add-literature"];
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar navbar-expand-lg navbar-custom px-5">
+      <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a

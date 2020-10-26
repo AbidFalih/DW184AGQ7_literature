@@ -44,6 +44,7 @@
 
 .home-container {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -51,6 +52,12 @@
 
 .center-vertical {
   display: flex;
+  align-items: center;
+}
+
+.center-all {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -89,6 +96,27 @@
 .h1-landing {
   line-height: 100% !important;
   font-family: "Times New Roman";
+}
+
+/* change the background color */
+.navbar-custom {
+  background-color: #161616;
+}
+/* change the link color */
+.nav-link {
+  color: white;
+}
+/* change the color of hovered links */
+.navbar-custom .nav-item:hover .nav-link {
+  color: red !important;
+}
+/* change the color of active links */
+.active {
+  color: #ee4622;
+}
+
+.search-home {
+  width: 600px !important;
 }
 
 /* ----------------------------------------*/

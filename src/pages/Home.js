@@ -7,18 +7,15 @@ import { useHistory } from "react-router-dom";
 
 const Home = () => {
   const [dummy, setDummy] = useState("");
-
-  // const history = useHistory();
-
-  // if (goToPageSearch != "") history.push(`/search-result${goToPageSearch}`);
-
   return (
-    <div className="bg-black h-100vh" style={{ position: "relative" }}>
+    <div
+      className="container-fluid bg-black h-100vh"
+      style={{ position: "relative" }}
+    >
       <NavBar />
       <div className="home-container">
-        <div>
-          <img src={HomeLogo} alt="big-search-logo" />
-          {/* <Search /> */}
+        <div className="center-all flex-column">
+          <img src={HomeLogo} alt="big-search-logo" className="mb-4" />
           <Search setQuery={(dummy) => setDummy(dummy)} />
         </div>
       </div>
