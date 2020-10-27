@@ -11,7 +11,7 @@ const NavBarAdmin = () => {
       <HeaderIcon />
       <div className="dropdown">
         <img
-          src="http://uploader.nusaserver.com/server/php/files/Chloe_Moretz_2018_2.jpg"
+          src="http://uploader.nusaserver.com/server/php/files/chloe-grace-moretz.jpg"
           alt="admin"
           className="rounded-circle img-profile-admin"
           data-toggle="dropdown"

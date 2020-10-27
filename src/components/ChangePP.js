@@ -2,12 +2,12 @@ import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { LiteratureContext } from "../context/LiteratureContext";
-import { API } from "../config/api";
+import { API, urlAssets } from "../config/api";
 
 const ChangePP = (props) => {
   const [state, dispatch] = useContext(LiteratureContext);
   const [thumb, setThumb] = useState("");
-  const [preview, setPreview] = useState(state.user.thumb);
+  const [preview, setPreview] = useState(urlAssets.img + state.user.thumb);
 
   const [patchUser] = useMutation(async () => {
     try {
@@ -64,7 +64,13 @@ const ChangePP = (props) => {
             Change
           </button>
         </form>
-        <img src={preview} alt="selected-picture" />
+        <div className="center-all">
+          <img
+            src={preview}
+            className="img-profile-big"
+            alt="selected-picture"
+          />
+        </div>
       </Modal.Body>
     </Modal>
   );
