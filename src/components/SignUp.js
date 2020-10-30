@@ -16,9 +16,10 @@ const SignUp = (props) => {
     gender: "",
     phone: "",
     address: "",
+    thumb: "profile-user.png",
   });
 
-  const { email, password, fullName, gender, phone, address } = formData;
+  const { email, password, fullName, gender, phone, address, thumb } = formData;
 
   const history = useHistory();
 
@@ -34,6 +35,7 @@ const SignUp = (props) => {
         gender,
         phone,
         address,
+        thumb,
       });
       const res = await API.post("/register", body, config);
       dispatch({
