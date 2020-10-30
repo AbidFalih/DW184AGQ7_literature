@@ -13,7 +13,7 @@ const MyCollection = () => {
     API.get(`/collection/${state.user.id}`)
   );
   if (isLoading) return <BoxLoading />;
-  if (error) return "An error has occured: " + error.message;
+  if (error) return alert("An error has occured: " + error.message);
 
   return (
     <div class="container-fluid bg-black h-100vh">
