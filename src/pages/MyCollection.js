@@ -22,8 +22,8 @@ const MyCollection = () => {
         <h3 className="fo-tnr">My Collection</h3>
         <div className="row mt-3">
           {data.data.collectionsUser.length != 0
-            ? data.data.collectionsUser.userLiteratures.map((literature) => (
-                <Literature literature={literature} />
+            ? data.data.collectionsUser.map((user) => (
+                <Literature literature={user.literature} />
               ))
             : ""}
         </div>
