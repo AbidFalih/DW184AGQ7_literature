@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "react-query";
 import { API } from "../config/api";
 import { BoxLoading } from "react-loadingg";
 import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const TableVerification = () => {
   const [, dispatch] = useContext(LiteratureContext);
@@ -66,7 +67,14 @@ const TableVerification = () => {
         {literatures.data.literatures.map((literature, index) => (
           <tr>
             <td>{index + 1}</td>
-            <td>{literature.author}</td>
+            <td>
+              <Link
+                to={`/detailUserLiterature/${literature.user.id}`}
+                userId={literature.user.id}
+              >
+                {literature.author}
+              </Link>
+            </td>
             <td>{literature.isbn}</td>
             <td className="text-primary">{literature.attache}</td>
             <td

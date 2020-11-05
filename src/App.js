@@ -12,6 +12,7 @@ import MyCollection from "./pages/MyCollection";
 import AddLiterature from "./pages/AddLiterature";
 import DetailLiteratur from "./pages/DetailLiteratur";
 import HomeAdmin from "./pages/HomeAdmin";
+import DetailUserLiterature from "./pages/DetailUserLiterature";
 
 //config & context
 import { API, setAuthToken } from "./config/api";
@@ -57,6 +58,11 @@ function App() {
           component={DetailLiteratur}
         />
         <AdminRoute exact path="/admin" component={HomeAdmin} />
+        <AdminRoute
+          exact
+          path="/detailUserLiterature/:id"
+          component={DetailUserLiterature}
+        />
       </Switch>
     </BrowserRouter>
   );
