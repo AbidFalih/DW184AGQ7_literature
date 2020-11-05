@@ -17,7 +17,6 @@ export const setAuthToken = (token) => {
 //   literature: "http://localhost:5000/src/uploads/literatures/",
 // };
 export const urlAssets = {
-  img:
-    "https://res.cloudinary.com/macloudd/image/upload/v1604616618/literature/thumbs/",
+  img: "https://res.cloudinary.com/macloudd/image/upload/v1604616618/",
   literature: "https://ma-literature.herokuapp.com/src/uploads/literatures/",
 };
