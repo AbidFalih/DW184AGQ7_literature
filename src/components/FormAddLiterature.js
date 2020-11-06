@@ -15,7 +15,7 @@ const FormAddLiterature = () => {
     pages: "",
     isbn: "",
     author: "",
-    thumb: "",
+    thumb: "literature/thumbs/lite-1_xpevyw.png",
     attache: "",
   });
 
@@ -50,7 +50,7 @@ const FormAddLiterature = () => {
         pages: "",
         isbn: "",
         author: "",
-        thumb: "",
+        thumb: "literature/thumbs/lite-1_xpevyw.png",
         attache: "",
       });
 
@@ -125,7 +125,7 @@ const FormAddLiterature = () => {
             setFormControl({ ...formControl, author: e.target.value });
           }}
         />
-        <div className="d-flex align-items-center">
+        {/* <div className="d-flex align-items-center">
           <label className="form-control custom-input my-0 label-form">
             Select Image:{" "}
           </label>
@@ -137,7 +137,7 @@ const FormAddLiterature = () => {
               setFormControl({ ...formControl, thumb: e.target.files[0] });
             }}
           />
-        </div>
+        </div> */}
 
         <div className="d-flex my-3 align-items-center">
           <label className="form-control custom-input my-0 label-form">
