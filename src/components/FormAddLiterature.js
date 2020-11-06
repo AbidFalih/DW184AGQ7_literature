@@ -141,12 +141,12 @@ const FormAddLiterature = () => {
 
         <div className="d-flex my-3 align-items-center">
           <label className="form-control custom-input my-0 label-form">
-            Attache File:{" "}
+            Attache File :{" "}
           </label>
           <input
             type="file"
             className="ml-3"
-            name="attache"
+            name="file"
             onChange={(e) => {
               setFormControl({ ...formControl, attache: e.target.files[0] });
             }}
