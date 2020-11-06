@@ -132,6 +132,7 @@ const FormAddLiterature = () => {
           <input
             type="file"
             className="ml-3"
+            name="thumb"
             onChange={(e) => {
               setFormControl({ ...formControl, thumb: e.target.files[0] });
             }}
@@ -145,6 +146,7 @@ const FormAddLiterature = () => {
           <input
             type="file"
             className="ml-3"
+            name="attache"
             onChange={(e) => {
               setFormControl({ ...formControl, attache: e.target.files[0] });
             }}

@@ -10,39 +10,45 @@ const NavBar = () => {
   let path = ["/profile", "/my-collection", "/add-literature"];
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-custom px-5">
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+    <nav className="navbar navbar-expand-lg navbar-custom px-5">
+      <div className="collapse navbar-collapse">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
             <a
               role="button"
-              class={useRouteMatch(path[0]) ? "nav-link active" : "nav-link"}
+              className={
+                useRouteMatch(path[0]) ? "nav-link active" : "nav-link"
+              }
               onClick={() => history.push(path[0])}
             >
               Profile
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a
               role="button"
-              class={useRouteMatch(path[1]) ? "nav-link active" : "nav-link"}
+              className={
+                useRouteMatch(path[1]) ? "nav-link active" : "nav-link"
+              }
               onClick={() => history.push(path[1])}
             >
               My Collection
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a
               role="button"
-              class={useRouteMatch(path[2]) ? "nav-link active" : "nav-link"}
+              className={
+                useRouteMatch(path[2]) ? "nav-link active" : "nav-link"
+              }
               onClick={() => history.push(path[2])}
             >
               Add Literature
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link"
+              className="nav-link"
               role="button"
               onClick={() => dispatch({ type: "LOGOUT" })}
             >
@@ -50,7 +56,7 @@ const NavBar = () => {
             </a>
           </li>
         </ul>
-        <div class="d-inline my-2 my-lg-0">
+        <div className="d-inline my-2 my-lg-0">
           <HeaderIcon />
         </div>
       </div>
