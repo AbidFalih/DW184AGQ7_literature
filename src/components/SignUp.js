@@ -6,24 +6,61 @@ import { API, setAuthToken } from "../config/api";
 import { LiteratureContext } from "../context/LiteratureContext";
 import { MdArrowDropDownCircle } from "react-icons/md";
 
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "./FormikControl";
+//import formik control
+
 const SignUp = (props) => {
   const [, dispatch] = useContext(LiteratureContext);
 
-  const [formData, setFormData] = useState({
+  const dropDownGender = [
+    { key: "Gender", value: null },
+    { key: "Man", value: false },
+    { key: "Woman", value: true },
+  ];
+
+  const initialValues = {
     email: "",
     password: "",
     fullName: "",
-    gender: "",
+    gender: null,
     phone: "",
     address: "",
-    thumb: "profile-user.png",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email().required(),
+    password: Yup.string().min(8).required(),
+    fullName: Yup.string().required(),
+    gender: Yup.boolean().required().nullable(),
+    phone: Yup.string().required(),
+    address: Yup.string().required(),
   });
 
-  const { email, password, fullName, gender, phone, address, thumb } = formData;
+  const onSubmit = (values) => {
+    console.log("Form data", values);
+    storeUser(values);
+  };
+
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  //   fullName: "",
+  //   gender: "",
+  //   phone: "",
+  //   address: "",
+  //   thumb: "profile-user.png",
+  // });
+
+  // const { email, password, fullName, gender, phone, address, thumb } = formData;
 
   const history = useHistory();
 
-  const [storeUser] = useMutation(async () => {
+  const [storeUser] = useMutation(async (values) => {
+    const { email, password, fullName, gender, phone, address } = values;
+
+    console.log(email, password, fullName, gender, phone, address);
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -35,8 +72,9 @@ const SignUp = (props) => {
         gender,
         phone,
         address,
-        thumb,
+        thumb: "profile-user.png",
       });
+      console.log("Body", body);
       const res = await API.post("/register", body, config);
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -72,10 +110,10 @@ const SignUp = (props) => {
     }
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    storeUser();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   storeUser();
+  // };
 
   return (
     <Modal {...props} centered>
@@ -83,7 +121,65 @@ const SignUp = (props) => {
         <Modal.Title className="font-weight-bolder">Sign Up</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {(formik) => {
+            return (
+              <Form>
+                <FormikControl
+                  control="input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  marginY="my-2"
+                />
+                <FormikControl
+                  control="input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  marginY="my-2"
+                />
+                <FormikControl
+                  control="select"
+                  name="gender"
+                  options={dropDownGender}
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="phone"
+                  placeholder="Phone"
+                  marginY="my-2"
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                />
+                <button
+                  type="submit"
+                  disabled={!formik.isValid}
+                  className="btn btn-danger btn-block my-3"
+                >
+                  Sign Up
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
+
+        {/* <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="email"
             className="form-control custom-input"
@@ -154,7 +250,7 @@ const SignUp = (props) => {
           <button type="submit" className="btn btn-danger btn-block my-3">
             Sign Up
           </button>
-        </form>
+        </form> */}
 
         <p className="text-center">
           Already have an account? Click{" "}

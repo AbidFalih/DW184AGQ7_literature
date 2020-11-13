@@ -7,8 +7,37 @@ import { LiteratureContext } from "../context/LiteratureContext";
 
 import ModalNotif from "./ModalNotif";
 
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "./FormikControl";
+
 const FormAddLiterature = () => {
   const [addBook, setaddBook] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const initialValues = {
+    title: "",
+    publication: "",
+    pages: "",
+    isbn: "",
+    author: "",
+    attache: "",
+  };
+
+  const validationSchema = Yup.object({
+    title: Yup.string().required(),
+    publication: Yup.date().required().nullable(),
+    pages: Yup.number().required(),
+    isbn: Yup.number().required(),
+    author: Yup.string().required(),
+    attache: Yup.string().required(),
+  });
+
+  const onSubmit = (values) => {
+    console.log("Form AddLiterature", values);
+    storeLiterature(values);
+  };
+
   const [formControl, setFormControl] = useState({
     title: "",
     publication: "",
@@ -26,24 +55,30 @@ const FormAddLiterature = () => {
 
   const history = useHistory();
 
-  const [storeLiterature] = useMutation(async () => {
+  const [storeLiterature] = useMutation(async (values) => {
+    // let { title, publication, pages, isbn, author, attache } = values;
+    // let thumb = "literature/thumbs/lite-1_xpevyw.png";
     try {
+      setLoading(true);
       const config = {
         headers: { "Content-Type": "multipart/form-data" },
       };
 
       const formData = new FormData();
-      formData.append("title", title);
-      formData.append("publication_date", publication);
-      formData.append("pages", pages);
-      formData.append("isbn", isbn);
-      formData.append("author", author);
-      formData.append("attache", attache);
-      formData.append("thumb", thumb);
-      formData.append("userId", userId);
+      await formData.append("title", title);
+      await formData.append("publication_date", publication);
+      await formData.append("pages", pages);
+      await formData.append("isbn", isbn);
+      await formData.append("author", author);
+      await formData.append("attache", attache);
+      await formData.append("thumb", thumb);
+      await formData.append("userId", userId);
+
+      console.log("Form Data", formData);
 
       const res = await API.post("/literature", formData, config);
 
+      setLoading(false);
       setFormControl({
         title: "",
         publication: "",
@@ -58,7 +93,9 @@ const FormAddLiterature = () => {
 
       return res;
     } catch (err) {
+      setLoading(false);
       alert(`Error creating literature: ${err}`);
+      console.log("Error upload", err);
     }
   });
 
@@ -70,6 +107,71 @@ const FormAddLiterature = () => {
   return (
     <div className="m-0 p-0">
       <h3 className="fo-tnr">Add Literature</h3>
+      {/* <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => {
+          return (
+            <Form className="mt-4" id="form-literature">
+              <FormikControl
+                control="input"
+                type="text"
+                name="title"
+                placeholder="Title"
+                marginY="my-3"
+              />
+              <FormikControl
+                control="date"
+                type="date"
+                name="publication"
+                placeholder="Publication Date"
+                marginY="my-3"
+              />
+              <FormikControl
+                control="input"
+                type="text"
+                name="pages"
+                placeholder="Pages"
+                marginY="my-3"
+              />
+              <FormikControl
+                control="input"
+                type="text"
+                name="isbn"
+                placeholder="ISBN"
+                marginY="my-3"
+              />
+              <FormikControl
+                control="input"
+                type="text"
+                name="author"
+                placeholder="Author"
+                marginY="my-3"
+              />
+              <FormikControl
+                control="file"
+                type="file"
+                name="attache"
+                placeholder="Attache Literature"
+                marginY="my-3"
+              />
+
+              <div className="d-flex flex-row-reverse my-3">
+                <button
+                  type="submit"
+                  disabled={!formik.isValid}
+                  className="btn btn-danger m-lg-0 p-2"
+                  onClick={() => setaddBook(true)}
+                >
+                  Add Literature
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik> */}
       <form
         id="form-literature"
         className="mt-4"
@@ -158,7 +260,7 @@ const FormAddLiterature = () => {
             className="btn btn-danger m-lg-0 p-2"
             onClick={() => setaddBook(true)}
           >
-            Add Literature
+            {loading ? "loading.." : "Add Literature"}
           </button>
         </div>
       </form>

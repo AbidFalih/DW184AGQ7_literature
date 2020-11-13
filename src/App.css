@@ -162,6 +162,11 @@
   background-color: rgba(65, 49, 49, 0.5);
 }
 
+.error {
+  color: red;
+  border-color: red !important;
+}
+
 /* ----------------------------------------*/
 
 #bg-landing {
