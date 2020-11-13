@@ -11,7 +11,6 @@ import { BoxLoading } from "react-loadingg";
 
 const SignIn = (props) => {
   const [, dispatch] = useContext(LiteratureContext);
-  const [loading, setLoading] = useState(false);
 
   const initialValues = {
     email: "",
@@ -34,7 +33,6 @@ const SignIn = (props) => {
     const body = JSON.stringify({ email, password });
 
     try {
-      setLoading(true);
       const res = await API.post("/login", body, config);
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -56,7 +54,6 @@ const SignIn = (props) => {
         });
       }
 
-      setLoading(false);
       if (res.data.data.isAdmin) {
         dispatch({
           type: "ADMIN",
@@ -65,7 +62,6 @@ const SignIn = (props) => {
       }
       return history.push("/home");
     } catch (err) {
-      setLoading(false);
       dispatch({
         type: "LOGIN_FAIL",
       });
@@ -146,20 +142,23 @@ const SignIn = (props) => {
                   name="email"
                   placeholder="Email"
                   marginY="my-2"
+                  borderError={formik.errors.email && formik.touched.email}
                 />
                 <FormikControl
                   control="input"
                   type="password"
                   name="password"
                   placeholder="Password"
-                  marginY="my-2"
+                  borderError={
+                    formik.errors.password && formik.touched.password
+                  }
                 />
                 <button
                   type="submit"
                   disabled={!formik.isValid}
                   className="btn btn-danger btn-block my-3"
                 >
-                  {loading ? "loading.." : "Sign in"}
+                  {formik.isSubmitting ? "loading.." : "Sign in"}
                 </button>
               </Form>
             );

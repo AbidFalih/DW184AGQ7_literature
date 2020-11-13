@@ -76,6 +76,7 @@ const SignUp = (props) => {
       });
       console.log("Body", body);
       const res = await API.post("/register", body, config);
+
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: res.data.data,
@@ -135,12 +136,16 @@ const SignUp = (props) => {
                   name="email"
                   placeholder="Email"
                   marginY="my-2"
+                  borderError={formik.errors.email && formik.touched.email}
                 />
                 <FormikControl
                   control="input"
                   type="password"
                   name="password"
                   placeholder="Password"
+                  borderError={
+                    formik.errors.password && formik.touched.password
+                  }
                 />
                 <FormikControl
                   control="input"
@@ -148,6 +153,9 @@ const SignUp = (props) => {
                   name="fullName"
                   placeholder="Full Name"
                   marginY="my-2"
+                  borderError={
+                    formik.errors.fullName && formik.touched.fullName
+                  }
                 />
                 <FormikControl
                   control="select"
@@ -160,19 +168,21 @@ const SignUp = (props) => {
                   name="phone"
                   placeholder="Phone"
                   marginY="my-2"
+                  borderError={formik.errors.phone && formik.touched.phone}
                 />
                 <FormikControl
                   control="input"
                   type="text"
                   name="address"
                   placeholder="Address"
+                  borderError={formik.errors.address && formik.touched.address}
                 />
                 <button
                   type="submit"
                   disabled={!formik.isValid}
                   className="btn btn-danger btn-block my-3"
                 >
-                  Sign Up
+                  {formik.isSubmitting ? "loading.." : "Sign Up"}
                 </button>
               </Form>
             );
